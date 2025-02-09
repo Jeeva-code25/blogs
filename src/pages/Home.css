@@ -1,0 +1,19 @@
+main .blog-container{
+    padding: 1rem 3rem;
+}
+
+.loading{
+    padding: 1rem 3rem;
+}
+.error{
+    padding: 1rem 3rem;
+}
+
+.blog-row{
+    justify-content: center;
+}
+
+.title{
+    margin: 0;
+    padding: 1rem 3rem 0rem 3rem;
+}

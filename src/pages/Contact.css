@@ -1,0 +1,9 @@
+.contact-container{
+    display: flex;
+    width: 100%;
+    padding: 2rem 3rem;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 auto;
+    transition: all 0.5s;
+}

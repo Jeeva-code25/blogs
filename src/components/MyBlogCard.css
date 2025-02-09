@@ -1,0 +1,28 @@
+.myblog-col{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 2rem;
+}
+
+.edit-btn{
+    text-decoration: none;
+    font-size: 1.2em;
+    margin: 1rem 0;
+    padding: .5rem 1rem;
+    color: #000;
+    background-color: lightgray;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.delete-btn{
+    font-size: 1.2em;
+    margin: 1rem 0.5rem;
+    padding: .5rem 1rem;
+    color: #fff;
+    background-color: #7c4ee4;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
