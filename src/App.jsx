@@ -29,9 +29,9 @@ function App() {
     if (user.accessToken) dispatch(fetchBlog(user.accessToken))
   }, [user.accessToken])
 
+  console.log(location.pathname);
 
   useEffect(() => {    
-    console.log(location.pathname);
     
     if (location.pathname.startsWith("/blogs")) {
       // Change URL when refreshing
@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/'>
+        <Route path='*'>
           <Route index element={<Login />} />
           <Route path='/users/login' element={<Login />} />
           <Route path='/users/register' element={<Register />} />
