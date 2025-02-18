@@ -31,6 +31,7 @@ function App() {
 
 
   useEffect(() => {    
+    console.log(location.pathname);
     
     if (location.pathname.startsWith("/blogs")) {
       // Change URL when refreshing

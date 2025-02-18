@@ -25,7 +25,7 @@ const MyBlogs = () => {
       </Row>
       {(loading) && <p className="loading">Loading...</p>}
       {(error) && <p className="error">{error}</p>}
-      {(myBlogs.length <= 0) &&<p className="no-data" style={{fontSize: "1.5em", textAlign: "center", margin: "10% auto"}}>You have no Post</p> }
+      {(!myBlogs || myBlogs.length <= 0) &&<p className="no-data" style={{fontSize: "1.5em", textAlign: "center", margin: "10% auto"}}>You have no Post</p> }
     </main>
   )
 }
