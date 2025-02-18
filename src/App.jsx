@@ -29,15 +29,15 @@ function App() {
     if (user.accessToken) dispatch(fetchBlog(user.accessToken))
   }, [user.accessToken])
 
-  console.log(location.pathname);
+  // console.log(location.pathname);
 
-  useEffect(() => {    
+  // useEffect(() => {    
     
-    if (location.pathname.startsWith("/blogs")) {
-      // Change URL when refreshing
-      navigate("/users/login", { replace: true }); // Redirect to another page
-    }
-  }, []);
+  //   if (location.pathname.startsWith("/blogs")) {
+  //     // Change URL when refreshing
+  //     navigate("/users/login", { replace: true }); // Redirect to another page
+  //   }
+  // }, []);
 
   return (
     <>
@@ -46,7 +46,7 @@ function App() {
           <Route index element={<Login />} />
           <Route path='/users/login' element={<Login />} />
           <Route path='/users/register' element={<Register />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
         <Route path='/blogs' element={<Layout search={search} setSearch={setSearch} />}>
           <Route index element={<Home loading={loading} error={error} user={user} blogs={blogs} />} />
@@ -56,10 +56,10 @@ function App() {
           <Route path='/blogs/editblog/:id' element={<EditBlog />} />
           <Route path='/blogs/about' element={<About />} />
           <Route path='/blogs/contact' element={<Contact />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
 
-        <Route path='*' element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
     </>
