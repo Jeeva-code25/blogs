@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router'
 import './Header.css'
 import logo from '../assets/logo.png'
 import searchIcn from '../assets/search.png'
 import menu from '../assets/menu.png'
+
 
 const Navigation = ({search, setSearch}) => {
   const location = useLocation().pathname.split('/')
@@ -12,6 +13,7 @@ const Navigation = ({search, setSearch}) => {
   
   const [navOpen, setNavOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+
   
   return (
     <header>
@@ -36,8 +38,9 @@ const Navigation = ({search, setSearch}) => {
           <li className="nav-item">
             <Link className={(path === "contact") ? "nav-link active-link" : "nav-link"} to='/blogs/contact' onClick={() => setPath("contact")}>Contact</Link>
           </li>
+          {(path === "blogs") &&<>
           <input type="text" name="search" id="search" className={(searchOpen)?"search open-search":"search"} placeholder='search' onChange={e => setSearch(e.target.value)} value={search}/>
-          <img src={searchIcn} alt="" className="search-btn" onClick={() => setSearchOpen(!searchOpen)}/>
+          <img src={searchIcn} alt="" className="search-btn" onClick={() => setSearchOpen(!searchOpen)}/></>}
         </ul>
       </nav>
       <img src={menu} alt="" className="menu-btn"  onClick={() => setNavOpen(!navOpen)}/>

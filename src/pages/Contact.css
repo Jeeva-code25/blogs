@@ -7,3 +7,14 @@
     margin: 0 auto;
     transition: all 0.5s;
 }
+
+@media(max-width: 768px){
+    .contact-title{
+        font-size: 0.9em;
+    }
+    .mobile, .e-mail{
+        font-size: 0.7em;
+        margin: 0;
+    }
+}
+

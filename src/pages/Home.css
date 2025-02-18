@@ -5,8 +5,10 @@ main .blog-container{
 .loading{
     padding: 1rem 3rem;
 }
-.error{
+.home-error{
+    color: red;
     padding: 1rem 3rem;
+    text-align: justify;
 }
 
 .blog-row{

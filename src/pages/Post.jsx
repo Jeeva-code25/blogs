@@ -2,9 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import api from '../../config/axiosConfig'
 import './Post.css'
 import { useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectLoginState } from '../features/user/loginSlice'
+import { postBlog } from '../features/blog/blogSlice'
 
-const Post = ({ userId, token }) => {
-
+const Post = () => {
+  const { userId, accessToken } = useSelector(selectLoginState)
+  const {loading, error } = useSelector(state => state.blog)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const titleRef = useRef(null)
   const descRef = useRef(null)
@@ -19,9 +24,8 @@ const Post = ({ userId, token }) => {
 
   useEffect(() => {
     setTitleError(!title.trim().length > 0)
-    setDescError(!desc.trim().length > 0)
+    setDescError(desc.trim().length < 50)
   }, [title, desc])
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,18 +37,14 @@ const Post = ({ userId, token }) => {
         description: desc
       }
       try {
-        if(!token) throw new Error("Empty token Refresh Page")
-        const res = await api.post('/blogs',
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-        )
-        console.log(res.data);
-        navigate('/blogs')
-        
+        if (!accessToken) throw new Error("Empty accessToken Refresh Page")
+        dispatch(postBlog({
+          token: accessToken,
+          data: data
+        }))
+
+        if(!loading && !error) navigate('/blogs')
+
       } catch (err) {
         console.error(err.message);
       }
@@ -67,13 +67,13 @@ const Post = ({ userId, token }) => {
 
   const handleValidate = () => {
     setTitleError(!title.trim().length > 0)
-    setDescError(!desc.trim().length > 0)
+    setDescError(desc.trim().length < 50)
   }
 
   return (
     <main className='post-container'>
 
-      <h3 className="post-tile">Create your own Post</h3>
+      <h3 className="container-title">Create your own Post</h3>
 
       <form onSubmit={handleSubmit}>
         <input type="text" name="post-title" id="post-title" placeholder='Title' className="post-title" onChange={e => setTitle(e.target.value)} value={title} ref={titleRef} onKeyDown={(e) => handleKeyDown(e, descRef)} />
@@ -86,7 +86,8 @@ const Post = ({ userId, token }) => {
         <button className="clear" onClick={clearField}>Clear</button>
         <button type='submit' className='create'>Create</button>
       </form>
-
+      {(loading) && <p className="loading">Loading...</p>}
+      {(error) && <p className="error">{error}</p>}
     </main>
   )
 }

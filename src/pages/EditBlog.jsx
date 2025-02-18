@@ -2,12 +2,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import api from '../../config/axiosConfig'
 import './EditBlog.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectBlogById, updateBlog } from '../features/blog/blogSlice'
+import { selectLoginState } from '../features/user/loginSlice'
 
-const EditBlog = ({ setBlogs, blogs, token, userId }) => {
+const EditBlog = () => {
+    
+    const dispatch = useDispatch()
+    const { userId, accessToken } = useSelector(selectLoginState)
     const id = useParams().id
     const navigate = useNavigate()
-    const blog = blogs.find((item) => item._id === id)
-
+    const {loading, error } = useSelector(state => state.blog)
+    const blog = useSelector(state => selectBlogById(state, id))
     const titleRef = useRef(null)
     const descRef = useRef(null)
     const [title, setTitle] = useState(blog?.title)
@@ -39,20 +45,13 @@ const EditBlog = ({ setBlogs, blogs, token, userId }) => {
             }
 
             try {
-                if (!token) throw new Error("Empty token Refresh Page")
-                const res = await api.patch('/blogs',
-                    data,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                )
-                console.log(res.data);
-                const otherblogs = blogs.filter(item => item._id != id)
-                setBlogs([...otherblogs, data])
+                if (!accessToken) throw new Error("Empty accessToken Refresh Page")
+                dispatch(updateBlog({
+                    token: accessToken,
+                    data: data
+                }))
 
-                navigate('/blogs/myblogs')
+                if(!loading && !error) navigate('/blogs/myblogs')
 
             } catch (err) {
                 console.error(err.message);
@@ -91,7 +90,8 @@ const EditBlog = ({ setBlogs, blogs, token, userId }) => {
 
                     <button type='submit' className='update'>Update</button>
                 </form>
-
+                {(loading) && <p className="loading">Loading...</p>}
+                {(error) && <p className="error">{error}</p>}
             </main>)
 
             :

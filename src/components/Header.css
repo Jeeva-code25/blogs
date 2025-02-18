@@ -28,7 +28,6 @@ header {
 }
 
 .nav-bar>ul {
-    position: relative;
     display: flex;
     margin: 0;
     list-style: none;
@@ -106,15 +105,16 @@ header {
         padding: 1rem 2rem;
     }
     .nav-bar{
+        position: absolute;
+        display: none;
         top: 3rem;
-        position: fixed;
-        /* z-index: 3; */
-        right: -100%;
-        transition: all 0.4s; 
+        right: -50%;
+        transition: all 0.8s; 
         padding: 2rem;
     }
     .nav-open{
-        right: 0%;
+        display: block;
+        right: 0;
     }
     .nav-bar>ul{
         flex-direction: column;
@@ -124,12 +124,12 @@ header {
 
 @media(max-width: 481px){
     .site-name{
-        font-size: 1.5em;
+        font-size: 1.3em;
     }
 
     .logo{
-        width: 2rem;
-        height: 2rem;
+        width: 1.3rem;
+        height: 1.3rem;
     }
 
 }

@@ -9,7 +9,7 @@ const NotFound = () => {
           <h1 className="not-found">404</h1>
           <p className="sry">Sorry!</p>
           <p className="sry">The link is broken, try to refresh or go to home</p>
-          <button className="go-home" onClick={() => navigate('/blogs')}>Go To Home</button>
+          <button className="go-home" onClick={() => navigate('/users/login')}>Go To Login</button>
         </div>
     </main>
   )

@@ -4,9 +4,13 @@ import { Col } from 'react-bootstrap'
 import { NavLink } from 'react-router'
 import api from '../../config/axiosConfig'
 import './MyBlogCard.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectLoginState } from '../features/user/loginSlice'
+import { deleteBlog } from '../features/blog/blogSlice'
 
-const MyBlogCard = ({ blogs, blog, token }) => {
-
+const MyBlogCard = ({ blog}) => {
+    const dispatch = useDispatch()
+    const { accessToken } = useSelector(selectLoginState)
     const id = blog?._id
 
 
@@ -15,18 +19,11 @@ const MyBlogCard = ({ blogs, blog, token }) => {
         
         if (id) {
             try {
-                if (!token) throw new Error("Empty token Refresh Page")
-                const res = await api.delete(`/blogs/${id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                )
-
-                console.log(res.data);
-                const otherblogs = blogs.filter(item => item._id != id)
-                setBlogs([...otherblogs])
+                if (!accessToken) throw new Error("Empty token Refresh Page")
+                    dispatch(deleteBlog({
+                        token: accessToken,
+                        id: id
+                    }))
 
             } catch (err) {
                 console.error(err.message);
@@ -39,7 +36,7 @@ const MyBlogCard = ({ blogs, blog, token }) => {
     }
 
     return (
-        <Col xs={12} className='myblog-col my-3'>
+        <Col xs={12} className='myblog-col mt-2'>
             <p className="date">{blog.updatedDate}</p>
             <h3 className="blog-title">{blog.title}</h3>
             <p className="blog-desc">{blog.description}</p>

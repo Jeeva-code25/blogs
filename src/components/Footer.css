@@ -37,6 +37,13 @@ footer{
 }
 
 @media(max-width: 768px){
+    .logo{
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+    .site-name{
+        font-size: 1.5em;
+    }
     .nav-item{
         font-size: 1rem;
     }
@@ -44,11 +51,16 @@ footer{
     .footer-nav-bar>ul{
         gap: .5rem;
     }
+
+    .social-btn{
+        width: 2rem;
+        height: 2rem;
+    }
 }
 
 @media(max-width: 481px){
     .nav-item{
-        font-size: .8rem;
+        font-size: .7rem;
     }
     .site-name{
         font-size: 1.5em;
@@ -57,6 +69,10 @@ footer{
     .logo{
         width: 2rem;
         height: 2rem;
+    }
+
+    .copy-right{
+        font-size: .6em;
     }
 
 }
