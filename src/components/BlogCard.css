@@ -15,11 +15,9 @@
     overflow: hidden;
 }
 .blog-desc{
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    display: flex;
+    width: 100%;
+    text-align: justify;
     margin: 0;
 }
 
