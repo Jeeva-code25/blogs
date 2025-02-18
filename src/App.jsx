@@ -29,25 +29,23 @@ function App() {
     if (user.accessToken) dispatch(fetchBlog(user.accessToken))
   }, [user.accessToken])
 
-  // console.log(location.pathname);
 
-  // useEffect(() => {    
-    
-  //   if (location.pathname.startsWith("/blogs")) {
-  //     // Change URL when refreshing
-  //     navigate("/users/login", { replace: true }); // Redirect to another page
-  //   }
-  // }, []);
+  useEffect(() => {
+
+    if (location.pathname.startsWith("/blogs")) {
+      // Change URL when refreshing
+      navigate("/users/login", { replace: true }); // Redirect to another page
+    }
+  }, []);
 
   return (
     <>
       <Routes>
-        <Route path='/'>
-          <Route index element={<Login />} />
-          <Route path='/users/login' element={<Login />} />
-          <Route path='/users/register' element={<Register />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
+        
+        <Route path="/" element={<Login />} />
+        <Route path="/users/login" element={<Login />} />
+        <Route path="/users/register" element={<Register />} />
+
         <Route path='/blogs' element={<Layout search={search} setSearch={setSearch} />}>
           <Route index element={<Home loading={loading} error={error} user={user} blogs={blogs} />} />
           <Route path='/blogs/post/:id' element={<Blog />} />
