@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='*'>
+        <Route path='/'>
           <Route index element={<Login />} />
           <Route path='/users/login' element={<Login />} />
           <Route path='/users/register' element={<Register />} />
